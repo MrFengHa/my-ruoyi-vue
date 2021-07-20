@@ -62,6 +62,11 @@
         <el-switch v-model="sidebarLogo" class="drawer-switch" />
       </div>
 
+      <div class="drawer-item">
+        <span>动态标题</span>
+        <el-switch v-model="dynamicTitle" class="drawer-switch" />
+      </div>
+
       <el-divider/>
 
       <el-button size="small" type="primary" plain icon="el-icon-document-add" @click="saveSetting">保存配置</el-button>
@@ -77,13 +82,11 @@ export default {
   components: { ThemePicker },
   data() {
     return {
+      theme: this.$store.state.settings.theme,
       sideTheme: this.$store.state.settings.sideTheme
     };
   },
   computed: {
-    theme() {
-      return this.$store.state.settings.theme
-    },
     fixedHeader: {
       get() {
         return this.$store.state.settings.fixedHeader
@@ -131,6 +134,17 @@ export default {
         })
       }
     },
+    dynamicTitle: {
+      get() {
+        return this.$store.state.settings.dynamicTitle
+      },
+      set(val) {
+        this.$store.dispatch('settings/changeSetting', {
+          key: 'dynamicTitle',
+          value: val
+        })
+      }
+    },
   },
   methods: {
     themeChange(val) {
@@ -138,6 +152,7 @@ export default {
         key: 'theme',
         value: val
       })
+      this.theme = val;
     },
     handleTheme(val) {
       this.$store.dispatch('settings/changeSetting', {
@@ -161,7 +176,9 @@ export default {
             "tagsView":${this.tagsView},
             "fixedHeader":${this.fixedHeader},
             "sidebarLogo":${this.sidebarLogo},
-            "sideTheme":"${this.sideTheme}"
+            "dynamicTitle":${this.dynamicTitle},
+            "sideTheme":"${this.sideTheme}",
+            "theme":"${this.theme}"
           }`
       );
       setTimeout(loading.close(), 1000)
