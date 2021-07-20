@@ -1,19 +1,20 @@
 package com.ruoyi.generator.util;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import org.apache.velocity.VelocityContext;
 import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.constant.GenConstants;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.generator.domain.GenTable;
 import com.ruoyi.generator.domain.GenTableColumn;
+import org.apache.velocity.VelocityContext;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * 模板处理工具类
- * 
+ *
  * @author ruoyi
  */
 public class VelocityUtils
@@ -126,11 +127,17 @@ public class VelocityUtils
     public static List<String> getTemplateList(String tplCategory)
     {
         List<String> templates = new ArrayList<String>();
-        templates.add("vm/java/domain.java.vm");
-        templates.add("vm/java/mapper.java.vm");
-        templates.add("vm/java/service.java.vm");
-        templates.add("vm/java/serviceImpl.java.vm");
-        templates.add("vm/java/controller.java.vm");
+//        templates.add("vm/java/domain.java.vm");
+//        templates.add("vm/java/mapper.java.vm");
+//        templates.add("vm/java/service.java.vm");
+//        templates.add("vm/java/serviceImpl.java.vm");
+//        templates.add("vm/java/controller.java.vm");
+
+        templates.add("vm/mp/domain.java.vm");
+        templates.add("vm/mp/mapper.java.vm");
+        templates.add("vm/mp/serviceImpl.java.vm");
+        templates.add("vm/mp/controller.java.vm");
+
         templates.add("vm/xml/mapper.xml.vm");
         templates.add("vm/sql/sql.vm");
         templates.add("vm/js/api.js.vm");
@@ -232,7 +239,7 @@ public class VelocityUtils
 
     /**
      * 根据列类型获取导入包
-     * 
+     *
      * @param genTable 业务表对象
      * @return 返回需要导入的包列表
      */
